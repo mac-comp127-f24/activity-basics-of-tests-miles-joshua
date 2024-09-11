@@ -1,8 +1,10 @@
 package testingbasics;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Roshambo {
     // The three possible hand shapes
@@ -24,11 +26,37 @@ public class Roshambo {
         }
         if (
             shape2.equals(SCISSORS) && shape1.equals(PAPER)
-            || shape2.equals(PAPER) && shape1.equals(ROCK)
+            || shape2.equals(PAPER) && shape1.equals(ROCK) 
+            || shape2.equals(ROCK) && shape1.equals(SCISSORS)
         ) {
             return 1;
         } else {
             return -1;
         }
     }
+        /**
+     * Plays one round of a Roshambo tournament, where all players make hand signs, then each player
+     * takes the hand sign of the player on their left if that player's sign beat their own.
+     * 
+     * @param handShapes The hand shapes of the players, with the first considered to be next to the
+     *                   last (because the players are in a circle).
+     * @return  A new list with the hand shapes for the next round.
+     */
+    public static List<String> playOneRound(List<String> handShapes) {
+        String shapeToLeft = handShapes.get(handShapes.size() -1);
+        List<String> results = new ArrayList<>();
+        for (String handShape: handShapes) {
+            if (compareShapes(handShape, shapeToLeft) == 1 || compareShapes(handShape, shapeToLeft) == 0){
+                results.add(shapeToLeft);
+            }
+            else {
+                results.add(handShape);
+            }
+        }
+
+        
+        
+        return results;
+    }
+
 }
